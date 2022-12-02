@@ -95,7 +95,7 @@ resource "aws_instance" "app_server" {
   }
 
 
-  provisioner "remote-exec" {
+  provisioner "exec" {
     # scripts = ["./exec_scripts/envsetup.sh", "./exec_scripts/service.sh"]
     inline = [
        "sudo chmod -R 777 /home/ubuntu/exec",
