@@ -77,9 +77,9 @@ resource "aws_security_group" "Group02-DevSecOps1" {
 
 resource "aws_instance" "app_server" {
   ami                    = "ami-096800910c1b781ba"
-  instance_type          = "t2.large"
-  key_name               = "x279"
-  vpc_security_group_ids = ["${aws_security_group.Group02-DevSecOps1.id}"]
+  instance_type          = "t2.micro"
+  key_name               = "x21177279"
+  vpc_security_group_ids = ["${aws_security_group.Group11-DevSecOps1.id}"]
   # user_data              = file("temp.sh")
   connection {
     type        = "ssh"
@@ -90,7 +90,7 @@ resource "aws_instance" "app_server" {
   }
 
   provisioner "file" {
-    source      = "exec_scripts"
+    source      = "exec"
     destination = "/home/ubuntu"
   }
 
@@ -98,9 +98,9 @@ resource "aws_instance" "app_server" {
   provisioner "remote-exec" {
     # scripts = ["./exec_scripts/envsetup.sh", "./exec_scripts/service.sh"]
     inline = [
-       "sudo chmod -R 777 /home/ubuntu/exec_scripts",
-       "./exec_scripts/envsetup.sh",
-       "./exec_scripts/service.sh"
+       "sudo chmod -R 777 /home/ubuntu/exec",
+       "./exec/envsetup.sh",
+       "./exec/service.sh"
     ]
   }
 
